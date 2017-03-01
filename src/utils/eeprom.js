@@ -25,7 +25,7 @@ const defaultEEPROM = [
   // Parameters for home direction debug info panelChannel
   0, 0, 65, 70,
   // Parameters for Call Sign
-  0, 0, 100, 120, 0, 1, 
+  0, 0, 130, 200, 0, 1, 
   // Default Call Sign ASCII bytes
   'C', 'A', 'L', 'L', ' ', 'S', 'I', 'G', 'N', 0
   
