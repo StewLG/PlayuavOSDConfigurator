@@ -147,6 +147,10 @@ class ParametersModule extends Component {
             parameters={this._props('attitude3d')}
             {...this._actions()}
           />
+          <Settings.CallSign
+            parameters={this._props('callSign')}
+            {...this._actions()}
+          />
           <Settings.ClimbRate
             parameters={this._props('climbRate')}
             {...this._actions()}

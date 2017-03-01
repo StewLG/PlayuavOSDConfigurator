@@ -7,6 +7,7 @@ import BatteryConsumed from './BatteryConsumed';
 import BatteryCurrent from './BatteryCurrent';
 import BatteryRemaining from './BatteryRemaining';
 import BatteryVoltage from './BatteryVoltage';
+import CallSign from './CallSign';
 import ClimbRate from './ClimbRate';
 import Compass from './Compass';
 import Efficiency from './Efficiency';
@@ -46,6 +47,7 @@ export default {
   BatteryCurrent,
   BatteryRemaining,
   BatteryVoltage,
+  CallSign,
   ClimbRate,
   Compass,
   Efficiency,

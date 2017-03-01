@@ -23,7 +23,12 @@ const defaultEEPROM = [
   // New parameters for rc channels.
   0, 0, 55, 40,
   // Parameters for home direction debug info panelChannel
-  0, 0, 65, 70
+  0, 0, 65, 70,
+  // Parameters for Call Sign
+  0, 0, 100, 120, 0, 1, 
+  // Default Call Sign ASCII bytes
+  'C', 'A', 'L', 'L', ' ', 'S', 'I', 'G', 'N', 0
+  
 ];
 
 function toEnabled(byte) {
@@ -390,12 +395,22 @@ const eepromMapping = [
   { path: ['rcChannels', 'visibleOn'] },
   { path: ['rcChannels', 'positionX'] },
   { path: ['rcChannels', 'positionY'] },
-    
   { path: ['homeDirectionDebugInfo', 'visibleOn'],
     convertFromParameters: toEnabled },
   { path: ['homeDirectionDebugInfo', 'visibleOn'] },
   { path: ['homeDirectionDebugInfo', 'positionX'] },
   { path: ['homeDirectionDebugInfo', 'positionY'] },
+  
+    
+  { path: ['callSign', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['callSign', 'visibleOn'] },
+  { path: ['callSign', 'positionX'] },
+  { path: ['callSign', 'positionY'] },    
+  { path: ['callSign', 'fontSize'] },
+  { path: ['callSign', 'hAlignment'] },
+  //{ path: ['callSign', 'positionY'] },   How to do "CALL SIGN TEXT" ?
+  
   
 ];
 
@@ -411,6 +426,7 @@ const skeletonParameters = {
   batteryCurrent: {},
   batteryRemaining: {},
   batteryVoltage: {},
+  callSign: {},
   climbRate: {},
   compass: {},
   firmware: {},

@@ -17,7 +17,7 @@ function Preview(props) {
   const { alarm, panel } = props;
   const {
     absoluteAltitude, alarms, altitudeScale, armState, artificialHorizon, batteryConsumed,
-    batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
+    batteryCurrent, batteryRemaining, batteryVoltage, callSign, climbRate, compass, efficiency,
     flightMode, linkQuality, rcChannels, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
     gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDirectionDebugInfo, homeDistance,
     radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, throttle, time,
@@ -39,6 +39,7 @@ function Preview(props) {
     batteryRemaining: 83.2,
     batteryVoltage: 12.4,
     climbRate: 3.8,
+    callSign: 'CALL SIGN HERE',
     flightMode: 0,
     homeLatitude: 484330500,
     homeLongitude: -46790000,
@@ -117,6 +118,9 @@ function Preview(props) {
           <Previews.BatteryVoltage {...batteryVoltage.toJS()} {...fcStatus}
             setPosition={setPosition('batteryVoltage')}
           />
+          <Previews.CallSign {...callSign.toJS()} {...fcStatus}
+            setPosition={setPosition('callSign')}
+          />
           <Previews.ClimbRate {...climbRate.toJS()} {...fcStatus}
             setPosition={setPosition('climbRate')}
           />
@@ -162,11 +166,9 @@ function Preview(props) {
           <Previews.HomeDirection {...homeDirection.toJS()} {...fcStatus}
             setPosition={setPosition('homeDirection')}
           />
-          
           <Previews.HomeDirectionDebugInfo {...homeDirectionDebugInfo.toJS()} {...fcStatus}
             setPosition={setPosition('homeDirectionDebugInfo')}
           />
-          
           <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus}
             units={units} setPosition={setPosition('homeDistance')}
           />
