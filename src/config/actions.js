@@ -24,6 +24,7 @@ export const UNITS = 'parameters/units';
 export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
 export const VISIBLE_ON = 'parameters/visible_on';
+//export const CALL_SIGN = 'parameters/text';
 
 function setAlarmEnabled(alarm, enabled) {
   return { type: ALARM_ENABLED, parameter: 'alarms', payload: { alarm, enabled } };
@@ -56,6 +57,12 @@ function setFontSize(parameter, fontSize) {
 function setHAlignment(parameter, hAlignment) {
   return { type: H_ALIGNMENT, parameter, payload: hAlignment };
 }
+
+/*
+function setCallSignText(parameter, callSignText) {
+  return { type: CALL_SIGN, parameter, payload: callSignText };
+}
+*/
 
 function setMax(parameter, max) {
   return { type: MAX, parameter, payload: max };

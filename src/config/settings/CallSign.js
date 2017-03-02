@@ -12,43 +12,25 @@ export default class CallSign extends Component {
       numberOfPanels: PropTypes.number.isRequired,      
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,      
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired, 
+      //callSignText: CustomPropTypes.value(PropTypes.string.isRequired).isRequired, 
     }).isRequired,
     setFontSize: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,    
     setPosition: PropTypes.func.isRequired,
-    setHAlignment: PropTypes.func.isRequired,    
+    setHAlignment: PropTypes.func.isRequired,   
+    //setCallSignText: PropTypes.func.isRequired,   
   }
 
   shouldComponentUpdate(nextProps) {
     return !this.props.parameters.equals(nextProps.parameters);
   }
 
-  // Climb Rate doesn't seem to need this
-  /*
-  _setEnabled(callSign) {
-    return (enabled) => {
-      this.props.setCallSignEnabled(alarm, parseInt(enabled, 10));
-    };
-  }
-
-  _setValue(callSign) {
-    return (value) => {
-      this.props.setCallSignValue(alarm, parseInt(value, 10));
-    };
-  }
-  */
-
   render() {
-    const { setFontSize, setPosition, setHAlignment, setVisibleOn } = this.props; 
+    const { setFontSize, setPosition, setHAlignment,/* setCallSignText, */setVisibleOn } = this.props; 
     const {
-      fontSize, numberOfPanels, positionX, positionY, hAlignment, visibleOn, 
+      fontSize, numberOfPanels, positionX, positionY, hAlignment, /*callSignText,*/ visibleOn, 
     } = this.props.parameters;
-    /*
-    const options = [
-      { value: 0, label: 'disabled' }, { value: 1, label: 'enabled' }
-    ];
-    */
     
     return (
       <Parameters.ParameterList name="call sign">
@@ -63,6 +45,9 @@ export default class CallSign extends Component {
             hAlignment={hAlignment} setHAlignment={setHAlignment}
           />
         </Column>
+        
+
+        
         <Parameters.VisibleOn visibleOn={visibleOn} name="callSign"
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
         />        
@@ -72,17 +57,8 @@ export default class CallSign extends Component {
   }
 }
 
-/*
-  if (eeprom_buffer.params.firmware_ver < 15) {
-    eeprom_buffer.params.firmware_ver = 15;
-    eeprom_buffer.params.Call_sign_enabled = 0;
-    eeprom_buffer.params.Call_sign_panel = 2;
-    eeprom_buffer.params.Call_sign_posX = 65;
-    eeprom_buffer.params.Call_sign_posY = 70;    
-    eeprom_buffer.params.Call_sign_align = 0;
-    eeprom_buffer.params.Call_sign_fontsize = 1;
-    sprintf(eeprom_buffer.params.Call_sign_text, "Call Sign Text");    
-    bNeedUpdateFlash = true;
-  }  
-*/
-
+        /*
+        <Parameters.CallSignText  name="callSign"
+          callSignText={callSignText} setCallSignText={setCallSignText}
+        />   
+        */
