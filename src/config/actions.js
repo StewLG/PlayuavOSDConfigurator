@@ -41,6 +41,10 @@ function setBaudRate(baudRate) {
   return { type: BAUD_RATE, parameter: 'serial', payload: baudRate };
 }
 
+function setBaudRateSummary(baudRate) {
+  return { type: BAUD_RATE, parameter: 'summary', payload: baudRate };
+}
+
 function setChannel(parameter, key, channel) {
   return { type: CHANNEL, parameter, payload: { key, channel } };
 }
@@ -134,6 +138,7 @@ export default {
   setAlarmValue,
   setAsBaseState,
   setBaudRate,
+  setBaudRateSummary,
   setChannel,
   setFcType,
   setFontSize,

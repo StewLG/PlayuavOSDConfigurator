@@ -410,6 +410,10 @@ const eepromMapping = [
   { path: ['summary', 'channelMin'] },
   { path: ['summary', 'channelMax'] },
 
+  { path: ['summary', 'baudRate'] },
+  { path: ['summary', 'fcType'] },
+
+
 
 ];
 

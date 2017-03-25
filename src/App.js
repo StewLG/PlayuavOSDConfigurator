@@ -43,7 +43,7 @@ export default class App extends Component {
         <Panel>
           <AppBar>
             <IconButton inverse icon="menu" onClick={this._toggleDrawer} />
-            PlayUAV OSD Configurator
+            PlayUAV OSD Configurator[HACK]
           </AppBar>
           <div className={styles.mainContent}>
             {this.props.children}
