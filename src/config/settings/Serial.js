@@ -36,10 +36,14 @@ export default class Serial extends Component {
        
     
     const baudRateOptions = [
-      { value: 1, label: '4800' }, { value: 2, label: '9600' },
-      { value: 3, label: '19200' }, { value: 4, label: '38400' },
-      { value: 5, label: '43000' }, { value: 6, label: '56000' },
-      { value: '7', label: '57600' }, { value: 8, label: '115200' }
+      { value: 1, label: '4800' }, 
+      { value: 2, label: '9600' },
+      { value: 3, label: '19200' }, 
+      { value: 4, label: '38400' },
+      { value: 5, label: '43000' }, 
+      { value: 6, label: '56000' },
+      { value: 7, label: '57600' }, 
+      { value: 8, label: '115200' }
     ];
     
     return (
