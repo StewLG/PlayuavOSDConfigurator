@@ -21,6 +21,7 @@ export default class Summary extends Component {
       switchChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       minValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       maxValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      disarmEnabledMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
 
     }).isRequired,
     setPosition: PropTypes.func.isRequired,
@@ -52,6 +53,10 @@ export default class Summary extends Component {
     this.props.setMode('summary', 'channelMode', channelEnabled);
   }
 
+  _setDisarmMode = (disarmEnabled) => {
+    this.props.setMode('summary', 'disarmMode', disarmEnabled);
+  }
+
 
   render() {
     const {
@@ -67,6 +72,7 @@ export default class Summary extends Component {
       switchChannel,
       minValue,
       maxValue,
+      disarmEnabledMode,
     } = this.props.parameters;
     const switchChannelOptions = [
       { value: 5, label: 'rc 5' }, 
@@ -118,6 +124,15 @@ export default class Summary extends Component {
           <Parameters.Select label="rc channel" value={switchChannel} 
            options={switchChannelOptions} setValue={this._setSwitchChannel} />
         </Column>
+
+
+        <Column width={50} >
+          <Parameters.Select label="show after disarming" value={disarmEnabledMode}
+            options={modeOptions} 
+            setValue={this._setDisarmMode}
+          />
+        </Column>
+
 
         <Parameters.VisibleOn visibleOn={visibleOn} name="summary"
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
