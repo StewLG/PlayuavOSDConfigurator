@@ -113,18 +113,18 @@ export default class Summary extends Component {
           />
         </Column>
 
-        <Column width={50} >
+        <Column width={60} >
           <Parameters.Select label="toggle channel" value={channelEnabledMode}
             options={modeOptions} 
             setValue={this._setToggleWithRCChannel}
           />
         </Column>
 
-        <Column width={50} >
+        <Column width={40} >
           <Parameters.Select label="rc channel" value={switchChannel} 
-           options={switchChannelOptions} setValue={this._setSwitchChannel} />
+           options={switchChannelOptions} 
+           setValue={this._setSwitchChannel} />
         </Column>
-
 
         <Column width={50} >
           <Parameters.Select label="show after disarming" value={disarmEnabledMode}
