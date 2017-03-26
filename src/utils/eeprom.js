@@ -25,7 +25,7 @@ const defaultEEPROM = [
   // Parameters for home direction debug info panelChannel
   0, 0, 65, 70,
   // Parameters for Summary -- TOTALLY FAKE
-  0, 0, 65, 70, 8, 1000, 2000,
+  0, 0, 65, 70, 8, 1000, 2000, 0
 ];
 
 function toEnabled(byte) {
@@ -405,10 +405,11 @@ const eepromMapping = [
   { path: ['summary', 'positionX'] },
   { path: ['summary', 'positionY'] },
 
-
+  { path: ['summary', 'channelEnabledMode'] },
   { path: ['summary', 'switchChannel'] },
   { path: ['summary', 'minValue'] },
   { path: ['summary', 'maxValue'] },
+
 
 
 ];

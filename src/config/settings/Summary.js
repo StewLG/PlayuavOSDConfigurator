@@ -48,6 +48,10 @@ export default class Summary extends Component {
     this.props.setChannel('summary', 'switch', switchChannel);
   }
 
+  _setToggleWithRCChannel = (channelEnabled) => {
+    this.props.setMode('summary', 'channelMode', channelEnabled);
+  }
+
 
   render() {
     const {
@@ -104,13 +108,15 @@ export default class Summary extends Component {
         </Column>
 
         <Column width={50} >
-          <Parameters.Select label="mode" value={channelEnabledMode}
-            options={modeOptions} setValue={this.props.setMode.bind(this, 'summary', 'channelEnabled')}
+          <Parameters.Select label="toggle channel" value={channelEnabledMode}
+            options={modeOptions} 
+            setValue={this._setToggleWithRCChannel}
           />
         </Column>
 
         <Column width={50} >
-          <Parameters.Select label="rc channel" value={switchChannel} options={switchChannelOptions} setValue={this._setSwitchChannel} />
+          <Parameters.Select label="rc channel" value={switchChannel} 
+           options={switchChannelOptions} setValue={this._setSwitchChannel} />
         </Column>
 
         <Parameters.VisibleOn visibleOn={visibleOn} name="summary"
