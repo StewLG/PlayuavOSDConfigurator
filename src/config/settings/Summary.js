@@ -2,86 +2,117 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
 import Column from '../../components/Column';
-import CustomPropTypes from '../../utils/PropTypes';
 import Input from '../../components/Input';
+import CustomPropTypes from '../../utils/PropTypes';
 
-// Re-do based on Serial.js, in an effort to get a working picker
+
+// SUMMARY
+// -------
+
 export default class Summary extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      fcType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      splashMillisecondsToShowValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+
+      switchChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      minValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      maxValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+
     }).isRequired,
-    setBaudRateSummary: PropTypes.func.isRequired,
-    setFcType: PropTypes.func.isRequired,
+    setPosition: PropTypes.func.isRequired,
+    setVisibleOn: PropTypes.func.isRequired,
+
+    setChannel: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
+
   }
 
   shouldComponentUpdate(nextProps) {
     return !this.props.parameters.equals(nextProps.parameters);
   }
-  
-  _setValue(summary) {
-    return (value) => {
-      this.props.setValue('summary', summary, parseInt(value, 10));
-    };
+
+
+  _setChannelMin = (channelMin) => {
+    this.props.setValue('summary', 'min', parseInt(channelMin, 10));
   }
-  
-  render() {
-    const { fcType, splashMillisecondsToShowValue } = this.props.parameters;
-    const { setBaudRateSummary, setFcType } = this.props;
-    const fcTypeOptions = [
-      { value: 0, label: 'apm/pixhawk' }, { value: 1, label: 'cc3d/revo' }
+
+  _setChannelMax = (channelMax) => {
+    this.props.setValue('summary', 'max', parseInt(channelMax, 10));
+  }
+
+  _setSwitchChannel = (switchChannel) => {
+    this.props.setChannel('summary', 'switch', switchChannel);
+  }
+
+
+
+/*    const rawOptions = [
+      { value: 0, label: 'percentage' }, { value: 1, label: 'raw value' }
     ];
-       
-    
-    const baudRateOptions = [
-      { value: 1, label: '4800' }, 
-      { value: 2, label: '9600' },
-      { value: 3, label: '19200' }, 
-      { value: 4, label: '38400' },
-      { value: 5, label: '43000' }, 
-      { value: 6, label: '56000' },
-      { value: 7, label: '57600' }, 
-      { value: 8, label: '115200' }
-    ];
-    
-/*
-// For reference -- do not delete or cut
-
-      <Parameters.ParameterList name="firmware">
-        <Column width={50} >
-          <Parameters.Select label="flight controller" options={fcTypeOptions}
-            setValue={setFcType} value={fcType}
-          />
-        </Column>
-        <Column width={50} >
-          <Parameters.Select label="baud rate" options={baudRateOptions}
-            setValue={setBaudRate} value={baudRate}
-          />
-        </Column>
-
-        <Column width={100} >
-          <Input type="number" label="Milliseconds to show version dialog on startup"
-            onChange={this._setValue('splashMillisecondsToShow')} value={splashMillisecondsToShowValue}
-          />
-        </Column>
-        
-      </Parameters.ParameterList>
-
-
 */
 
 
+
+  render() {
+    const {
+      setPosition,
+      setVisibleOn,   
+    } = this.props;
+    const {
+      numberOfPanels,
+      positionX,
+      positionY,
+      visibleOn,
+      switchChannel,
+      minValue,
+      maxValue,
+    } = this.props.parameters;
+    const switchChannelOptions = [
+      { value: 5, label: 'rc 5' }, 
+      { value: 6, label: 'rc 6' },
+      { value: 7, label: 'rc 7' }, 
+      { value: 8, label: 'rc 8' },
+      { value: 9, label: 'rc 9' }, 
+      { value: 10, label: 'rc 10' },
+      { value: 11, label: 'rc 11' }, 
+      { value: 12, label: 'rc 12' },
+      { value: 13, label: 'rc 13' }, 
+      { value: 14, label: 'rc 14' },
+      { value: 15, label: 'rc 15' }, 
+      { value: 16, label: 'rc 16' }
+    ];
+
+    const minChannelInput = 1000;
+    const maxChannelInput = 2000;
+
+    // Use SimpleSettings as seen in LinkQuality??
+
     return (
-      <Parameters.ParameterList name="summary two">
+      <Parameters.ParameterList name="summary panel">
+        <Parameters.Position labelX="position x" labelY="position y" name="summary"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
 
         <Column width={50} >
-          <Parameters.Select label="flight controller" options={fcTypeOptions}
-            setValue={setFcType} value={fcType}
+          <Input type="number" min={minChannelInput} max={maxChannelInput}
+            label="min" value={minValue} onChange={this._setChannelMin}
           />
         </Column>
-        
+        <Column width={50} >
+          <Input type="number" min={minChannelInput} max={maxChannelInput}
+            label="max" value={maxValue} onChange={this._setChannelMax}
+          />
+        </Column>
+        <Column width={50} >
+          <Parameters.Select label="rc channel" value={switchChannel} options={switchChannelOptions} setValue={this._setSwitchChannel} />
+        </Column>
+
+        <Parameters.VisibleOn visibleOn={visibleOn} name="summary"
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }
