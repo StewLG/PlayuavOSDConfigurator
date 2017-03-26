@@ -17,6 +17,7 @@ export default class Summary extends Component {
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
 
+      channelEnabledMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       switchChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       minValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       maxValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -25,6 +26,7 @@ export default class Summary extends Component {
     setPosition: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
 
+    setMode: PropTypes.func.isRequired,
     setChannel: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
 
@@ -33,7 +35,6 @@ export default class Summary extends Component {
   shouldComponentUpdate(nextProps) {
     return !this.props.parameters.equals(nextProps.parameters);
   }
-
 
   _setChannelMin = (channelMin) => {
     this.props.setValue('summary', 'min', parseInt(channelMin, 10));
@@ -48,24 +49,17 @@ export default class Summary extends Component {
   }
 
 
-
-/*    const rawOptions = [
-      { value: 0, label: 'percentage' }, { value: 1, label: 'raw value' }
-    ];
-*/
-
-
-
   render() {
     const {
       setPosition,
-      setVisibleOn,   
+      setVisibleOn,
     } = this.props;
     const {
       numberOfPanels,
       positionX,
       positionY,
       visibleOn,
+      channelEnabledMode,
       switchChannel,
       minValue,
       maxValue,
@@ -85,10 +79,12 @@ export default class Summary extends Component {
       { value: 16, label: 'rc 16' }
     ];
 
+    const modeOptions = [
+      { value: 0, label: 'disabled' }, { value: 1, label: 'enabled' }
+    ];
+
     const minChannelInput = 1000;
     const maxChannelInput = 2000;
-
-    // Use SimpleSettings as seen in LinkQuality??
 
     return (
       <Parameters.ParameterList name="summary panel">
@@ -106,6 +102,13 @@ export default class Summary extends Component {
             label="max" value={maxValue} onChange={this._setChannelMax}
           />
         </Column>
+
+        <Column width={50} >
+          <Parameters.Select label="mode" value={channelEnabledMode}
+            options={modeOptions} setValue={this.props.setMode.bind(this, 'summary', 'channelEnabled')}
+          />
+        </Column>
+
         <Column width={50} >
           <Parameters.Select label="rc channel" value={switchChannel} options={switchChannelOptions} setValue={this._setSwitchChannel} />
         </Column>
