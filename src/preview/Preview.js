@@ -194,11 +194,6 @@ function Preview(props) {
           <Previews.SpeedScale {...speedScale.toJS()} {...fcStatus}
             units={units} setPosition={setPosition('speedScale')}
           />
-
-          <Previews.Summary {...summary.toJS()} {...fcStatus}
-            setPosition={setPosition('summary')}
-          />
-
           <Previews.Throttle {...throttle.toJS()} {...fcStatus}
             setPosition={setPosition('throttle')}
           />
@@ -220,6 +215,11 @@ function Preview(props) {
           <Previews.Wind {...wind.toJS()} {...fcStatus} units={units}
             setPosition={setPosition('wind')}
           />
+
+          <Previews.Summary {...summary.toJS()} {...fcStatus}
+            setPosition={setPosition('summary')}
+          />
+
         </div>
         <Column width={50}>
           <Label text="panel" />
